@@ -21,7 +21,7 @@ public class MedicalStore {
 	private long phone;
 	@ManyToOne
 	private Admin admin;
-	@OneToOne
+	@OneToOne(mappedBy = "medicalStore")
 	private Address address;
 	
 }
