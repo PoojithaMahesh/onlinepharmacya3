@@ -22,6 +22,7 @@ public class Address {
 	private String state;
 	private long pincode;
 	@ManyToOne
+	@JoinColumn
 	private Customer customer;
 	
 	@OneToOne
