@@ -11,6 +11,15 @@ import com.jsp.onlinepharmacya3.util.ResponseStructure;
 @RestControllerAdvice
 public class OnlinePharmacyExceptionHandler extends ResponseEntityExceptionHandler {
 
+	 
+	@ExceptionHandler
+	public ResponseEntity<ResponseStructure<String>> handlePhoneNumberNotValidException(AdminPhoneNumberNotValidException exception){
+		ResponseStructure<String> structure=new ResponseStructure<>();
+		structure.setMessage("INVALID PHONENUMBER");
+		structure.setHttpStatus(HttpStatus.NOT_FOUND.value());
+		structure.setData(exception.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(structure,HttpStatus.NOT_FOUND);
+	}
 	@ExceptionHandler
 	public ResponseEntity<ResponseStructure<String>> handleEmailNotValidException(AdminEmailNotValidException exception){
 		ResponseStructure<String>  structure=new ResponseStructure<>();

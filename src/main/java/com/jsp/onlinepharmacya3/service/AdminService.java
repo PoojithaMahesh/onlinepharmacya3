@@ -10,6 +10,7 @@ import com.jsp.onlinepharmacya3.dto.Admin;
 import com.jsp.onlinepharmacya3.exception.AdminEmailNotValidException;
 import com.jsp.onlinepharmacya3.exception.AdminIdNotFoundException;
 import com.jsp.onlinepharmacya3.exception.AdminPasswordNotValidException;
+import com.jsp.onlinepharmacya3.exception.AdminPhoneNumberNotValidException;
 import com.jsp.onlinepharmacya3.util.ResponseStructure;
 
 @Service
@@ -84,5 +85,56 @@ public class AdminService {
 //			id is not present
 			throw new AdminIdNotFoundException("sorry failed to fetch the data");
 		}
+	}
+
+	public ResponseEntity<ResponseStructure<Admin>> resetPassword(String email, String newPassword, long phone) {
+		Admin dbAdmin=dao.findAdminByEMail(email);
+		if(dbAdmin!=null) {
+//			admin is present i can reset the password
+			if(dbAdmin.getPhoneNumber()==phone) {
+//				number is matching means he is the valid admin 
+//				soi can give a chance to update
+				
+				dbAdmin.setPassword(newPassword);
+				dao.updateAdmin(dbAdmin.getAdminId(), dbAdmin);
+				ResponseStructure<Admin> structure=new ResponseStructure<>();
+				structure.setMessage("Admin PASSWORD UPADTED successfully");
+				structure.setHttpStatus(HttpStatus.OK.value());
+				structure.setData(dbAdmin);
+	            return new ResponseEntity<ResponseStructure<Admin>>(structure,HttpStatus.OK);	
+				
+			}else {
+//				phonenumber is not valid
+//				raise the exception
+				throw new AdminPhoneNumberNotValidException("Sorry failed to reset the password");
+			}
+			
+		}else {
+//			admin email is not present
+//			INVALID EMAIL
+			throw new AdminEmailNotValidException("Sorry failed to Reset the password");
+		}
+	}
+
+	public ResponseEntity<ResponseStructure<Admin>> deleteAdminById(int adminId) {
+		Admin dbAdmin=dao.deleteAdminById(adminId);
+		if(dbAdmin!=null) {
+//			admin is present then i have deleted the data
+			ResponseStructure<Admin> structure=new ResponseStructure<>();
+			structure.setMessage("Admin deleted successfully");
+			structure.setHttpStatus(HttpStatus.FORBIDDEN.value());
+			structure.setData(dbAdmin);
+            return new ResponseEntity<ResponseStructure<Admin>>(structure,HttpStatus.FORBIDDEN);	
+			
+		}else {
+//			admin id is not present
+//			raise one exception
+			throw new AdminIdNotFoundException("Sorry failed to delete the admin details");
+		}
+		
+		
+		
+		
+		
 	}
 }

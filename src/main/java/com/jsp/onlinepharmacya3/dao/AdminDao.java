@@ -57,4 +57,17 @@ public class AdminDao {
 		return null;
 	}
 	}
+
+	public Admin deleteAdminById(int adminId) {
+		Optional<Admin> optional=repo.findById(adminId);
+		if(optional.isPresent()) {
+//			admin is presnet now i can delete the data;
+			
+			 repo.deleteById(adminId);
+ 			return optional.get();
+		}else {
+			return null;
+			
+		}
+	}
 }

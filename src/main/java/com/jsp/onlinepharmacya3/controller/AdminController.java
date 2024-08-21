@@ -2,6 +2,7 @@ package com.jsp.onlinepharmacya3.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -38,6 +39,26 @@ public class AdminController {
 	public ResponseEntity<ResponseStructure<Admin>> findAdminById(@RequestParam int adminId){
 		return service.findAdminById(adminId);
 	}
+	
+//	reset password=email,newpassword,phonenumber
+//	delete:::::::::::::101%
+	
+	@PostMapping("/resetpassword")
+	public ResponseEntity<ResponseStructure<Admin>> resetAdminPassword(@RequestParam String email,
+			@RequestParam String newPassword,@RequestParam long phone){
+		return service.resetPassword(email,newPassword,phone);
+	}
+	
+	@DeleteMapping("/delete")
+	public ResponseEntity<ResponseStructure<Admin>> deleteAdminById(@RequestParam int adminId){
+		return service.deleteAdminById(adminId);
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	
