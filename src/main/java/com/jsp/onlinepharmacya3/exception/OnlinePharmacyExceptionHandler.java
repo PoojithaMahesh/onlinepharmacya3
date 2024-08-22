@@ -49,7 +49,15 @@ public class OnlinePharmacyExceptionHandler extends ResponseEntityExceptionHandl
 		
 	}
 	
-	
+	@ExceptionHandler
+	public ResponseEntity<ResponseStructure<String>> handleAddressIdNotFoundException(AddressIdNotFoundException exception){
+		ResponseStructure<String> structure=new ResponseStructure<>();
+		structure.setMessage("Sorry Address id is not found");
+		structure.setHttpStatus(HttpStatus.NOT_FOUND.value());
+		structure.setData(exception.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(structure,HttpStatus.NOT_FOUND);
+		
+	}
 	
 	
 	

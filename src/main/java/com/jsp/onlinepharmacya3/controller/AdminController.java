@@ -39,9 +39,7 @@ public class AdminController {
 	public ResponseEntity<ResponseStructure<Admin>> findAdminById(@RequestParam int adminId){
 		return service.findAdminById(adminId);
 	}
-	
-//	reset password=email,newpassword,phonenumber
-//	delete:::::::::::::101%
+
 	
 	@PostMapping("/resetpassword")
 	public ResponseEntity<ResponseStructure<Admin>> resetAdminPassword(@RequestParam String email,
