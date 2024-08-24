@@ -70,5 +70,13 @@ public class OnlinePharmacyExceptionHandler extends ResponseEntityExceptionHandl
 		
 	}
 	
-	
+	@ExceptionHandler
+	public ResponseEntity<ResponseStructure<String>> handleStaffIdNotFoundException(StaffIdNotFoudException exception){
+		ResponseStructure<String> structure=new ResponseStructure<>();
+		structure.setMessage("Sorry Staff id is not found");
+		structure.setHttpStatus(HttpStatus.NOT_FOUND.value());
+		structure.setData(exception.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(structure,HttpStatus.NOT_FOUND);
+		
+	}
 }
