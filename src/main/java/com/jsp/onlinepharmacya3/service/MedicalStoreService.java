@@ -39,6 +39,7 @@ public class MedicalStoreService {
 //				that address is the valid address
 //				admin is also valid
 //				now i can establish the medicalStore
+				dbAddress.setMedicalStore(medicalStore);
 				medicalStore.setAddress(dbAddress);
 				MedicalStore dbMedicalStore=dao.saveMedicalStore(medicalStore);
 				

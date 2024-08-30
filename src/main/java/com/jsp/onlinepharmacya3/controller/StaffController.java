@@ -39,5 +39,8 @@ public class StaffController {
 	public ResponseEntity<ResponseStructure<Staff>> deleteStaff(@RequestParam int staffId){
 		return service.deleteStaff(staffId);
 	}
+//	loginstaff
+//	resetpassword
+	
 }
 
