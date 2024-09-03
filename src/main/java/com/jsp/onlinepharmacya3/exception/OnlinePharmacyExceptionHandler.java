@@ -63,6 +63,26 @@ public class OnlinePharmacyExceptionHandler extends ResponseEntityExceptionHandl
 		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.NOT_FOUND);
 
 	}
+	@ExceptionHandler
+	public ResponseEntity<ResponseStructure<String>> handleBookingIdNotFoundException(
+			BookingIdNotFoundException exception) {
+		ResponseStructure<String> structure = new ResponseStructure<>();
+		structure.setMessage("Sorry Booking id is not found");
+		structure.setHttpStatus(HttpStatus.NOT_FOUND.value());
+		structure.setData(exception.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.NOT_FOUND);
+
+	}
+	@ExceptionHandler
+	public ResponseEntity<ResponseStructure<String>> handleCantCancelledException(
+			BookingCantCancelledException exception) {
+		ResponseStructure<String> structure = new ResponseStructure<>();
+		structure.setMessage("Sorry Booking Cant cancelled");
+		structure.setHttpStatus(HttpStatus.NOT_FOUND.value());
+		structure.setData(exception.getMessage());
+		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.NOT_FOUND);
+
+	}
 
 	@ExceptionHandler
 	public ResponseEntity<ResponseStructure<String>> handleAddressIdNotFoundException(
